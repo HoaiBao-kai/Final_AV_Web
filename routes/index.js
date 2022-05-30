@@ -48,12 +48,6 @@ router.get('/logout', (req, res, next) => {
 })
 
 router.post('/dangnhap', loginValidator, (req, res, next) => {
-  let result = validationResult(req);
-  let today = new Date();
-  let date = today.getFullYear() + '-' +(today.getMonth()+1) + '-' + today.getDate();
-  let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  let dateTime = date+' '+time;
-  let current = new Date(dateTime); 
   if (result.errors.length === 0) {
       const {username, password} = req.body;
 
@@ -83,9 +77,11 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
               req.flash('error', 'Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ')
               return res.redirect('/dangnhap')
             }
-
-            let time = current - results[0].lock_account_day
+            let current = new Date().getTime();
+            let dDate = new Date(results[0].lock_account_day).getTime();
+            let time = current - dDate;
             console.log(time)
+            
             if(results[0].unusual_signin === 1 && time <6000){
               console.log('Chặn')
               req.flash('error', 'Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút')
@@ -97,6 +93,7 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
                 req.flash('error', 'Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút')
                 req.flash('password', password)
                 req.flash('username', username)
+                current = new Date();
                 updateUnusual(1,username,current)
                 countWrongPass(count, username)
                 return res.redirect('/dangnhap')
@@ -106,6 +103,7 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
                 req.flash('password', password)
                 req.flash('username', username)
                 countWrongPass(count, username)
+                current = new Date();
                 lockAccount("TK4", username, current)
                 return res.redirect('/dangnhap')
               }
