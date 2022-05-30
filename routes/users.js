@@ -380,12 +380,7 @@ router.post('/nhapmatkhaumoi', firstResetPassValidator ,function(req, res, next)
 
 
   if(OTP_user){
-    let today = new Date();
-    let date = today.getFullYear() + '-' +(today.getMonth()+1) + '-' + today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let thoigian = date+' '+time;
-    let datelucgui = new Date(thoigian); 
-    if(!checkOTP(datelucgui,OTP_user)){
+    if(!checkOTP(OTP_user)){
       const error =  "OTP không hợp lệ ! Vui lòng thử lại !"
       res.render('nhapmatkhaumoi',{error, email, password, cfpassword})
     }else{
@@ -817,15 +812,10 @@ router.post('/xacnhanchuyentien',IsLogin,transaction_accept,(req, res)=>{
   let sdt = nguoinhan.slice(0,10)
   let id = Math.floor(Math.random() * (999999 - 100000)) + 100000;
   let id1 = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-  let today = new Date();
-  let date = today.getFullYear() + '-' +(today.getMonth()+1) + '-' + today.getDate();
-  let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  let thoigiangui = date+' '+time;
-  let datelucgui = new Date(thoigiangui); 
   const sql = 'update account set account_balance = ? where phone = ?'
   const sql1 = 'insert into transaction(id, kind, username, money, fullname, notes, phone, receiver_phone, delivery_time, delivery_fee, status, benchiuphi) values(?,?,?,?,?,?,?,?,?,?,?,?)'
   const sql2 = 'select email from account where phone = ?'
-  if (checkOTP(datelucgui,req.body.OTP)) {
+  if (checkOTP(req.body.OTP)) {
     get_info(user.username, function(results) {
       if (Number(sotien) <= 5000000) {
         get_reciver(sdt, function(data) {

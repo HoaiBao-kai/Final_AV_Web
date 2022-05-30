@@ -117,16 +117,10 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
             }else{
               let user = results[0]
               req.session.user = user
-              // console.log('Đăng nhập thành công')
-              // if (!(results[0].username === "admin")) {
-              //     resetLock(username)
-              //     if (results[0].reset_password === 1) {
-              //       return res.redirect('/users/doimatkhaulandau')
-              //     }
 
-              //     return res.redirect('/users/')
-              // }
-              
+              const sql2 = 'update account set kind = "TK2", unusual_signin = 0, count_wrongpass = 0 where username = ?';
+              const params2 = [username];
+              db.query(sql2, params2)
               return res.redirect('/')
             }
           }

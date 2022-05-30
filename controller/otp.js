@@ -1,32 +1,27 @@
 const sendMail = require("./mail");
 const totp = require("totp-generator");
-
-let otp = totp("JBSWY3DPEHPK3PXP", { period: 60 })
+let s_time;
+let r_time;
+let otp;
 function sendOTP(email){
+    otp = totp("JBSWY3DPEHPK3PXP", { period: 60 })
     console.log('OPT: ' + otp)
+    s_time = new Date().getTime();
+    console.log(s_time)
     sendMail(email, otp)
 }
 
-let today = new Date();
-let date = today.getFullYear() + '-' +(today.getMonth()+1) + '-' + today.getDate();
-let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-let thoigian = date+' '+time;
-let currentDate = new Date(thoigian); 
-
-
-function checkOTP(datelucnhan, uotp){
-    console.log('OTP check ' + otp)
-    console.log('uOTP check '+uotp)
+function checkOTP(uotp){
+    r_time = new Date().getTime()
+    console.log(r_time)
+    let time = r_time-s_time
     if(uotp != otp) {
         console.log('Không chấp nhận otp')
         return false
     }
     else{
-        let time = datelucnhan - currentDate
-        console.log(datelucnhan)
-        console.log(currentDate)
-        console.log(time)
         if(time>60000){
+            console.log('Thời gian không hợp lệ')
             return false;
         } 
         console.log('Chấp nhận OTP')
