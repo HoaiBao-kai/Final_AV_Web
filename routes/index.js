@@ -76,6 +76,7 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
             
             if(results[0].kind === 'TK4'){
               req.flash('error', 'Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ')
+              req.flash('username', username)
               return res.redirect('/dangnhap')
             }
             let current = new Date().getTime();
@@ -83,9 +84,11 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
             let time = current - dDate;
             console.log('time')
             console.log(time)
-            if(results[0].unusual_signin === 1 && time <60000){
+            if(results[0].unusual_signin === 1 && time <60000 && results[0].count_wrongpass <3){
               req.flash('error', 'Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút')
-              return res.redirect('/dangnhap')
+              countWrongPass(count, username)
+              req.flash('username', username)
+              return res.redirect('/dangnhap')  
             }
             
             if (!check){
@@ -113,7 +116,12 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
                 lockAccount("TK4", username, current)
                 return res.redirect('/dangnhap')
               }
-                req.flash('error', 'Mật khẩu không đúng')
+                if(results[0].unusual_signin===1){
+                  req.flash('error', 'Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút')
+                }
+                else{
+                  req.flash('error', 'Mật khẩu không đúng')
+                }
                 req.flash('password', password)
                 req.flash('username', username)
                 countWrongPass(count, username)
