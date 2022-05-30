@@ -837,8 +837,8 @@ router.post('/xacnhanchuyentien',IsLogin,transaction_accept,(req, res)=>{
               if(err){
                 console.log(err)
               }
-              message = "Quý khách đã nhận được số tiền: " + sotien +"\n" 
-              +"Số tiền hiện tại của quý khách là: " + new_balance2
+              message = "Quý khách đã nhận được số tiền: " + sotien.toLocaleString() +"\n" 
+              +"Số tiền hiện tại của quý khách là: " + new_balance2.toLocaleString()
               
               
               sendMail(results[0].email,message)
