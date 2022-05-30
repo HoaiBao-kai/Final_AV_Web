@@ -1,0 +1,32 @@
+<header>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a href="/users">
+                <div class="navbar-header" style="width: 100%">
+                    <span id='vie'>Vie</span>
+                    <span id="pay">Pay</span>
+                </div>
+            </a>
+
+            <ul class="nav navbar-nav  navbar-right" style="color: white;padding-left:10px;width: 10%;">
+
+            </ul>
+            <ul class="nav navbar-nav  navbar-right" style="width:15%">
+
+                <div class="dropdown">
+                    <a><img src="/image/avatar.png" id="avatar">
+                        <span style="color: white;">
+                            <%= fullname %>
+                        </span></a>
+
+                    <div class="dropdown-content">
+                        <a href="/users/XemThongTinCaNhan">Thông tin cá nhân</a>
+                        <a href="/users/lichsugiaodich">Lịch sử giao dịch</a>
+                        <a href="/users/doimatkhau">Đổi mật khẩu</a>
+                        <a href="/logout">Đăng xuất</a>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</header>

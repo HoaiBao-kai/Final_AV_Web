@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Nạp tiền</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('header_user.ejs',{fullname:fullname}) %>
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <form action="muathedienthoai" method="post">
+                    <div class="card1">
+                        <div style="padding:25px;">
+                            <table>
+                                <b>
+                                    <label for="">Nhà Mạng</label>
+                                </b>
+                                <tr>
+                                    <th class="gia">
+                                        <label>
+                                            <input type="radio" name="mang" value="Viettel" checked>
+                                            <img src="../image/viettel.png"
+                                                style="background-color: white;border:1px solid rgb(229, 231, 236);height: 90px; width: 90%; text-align: center; border-radius:5px;">
+                                        </label>
+                                    </th>
+                                    <th class="gia">
+                                        <label>
+                                            <input type="radio" name="mang" value="Mobifone" checked>
+                                            <img src="../image/mobi.png"
+                                                style="background-color: white;border:1px solid rgb(229, 231, 236);height: 90px; width: 90%; text-align: center; border-radius:5px;">
+                                        </label>
+                                    </th>
+                                    <th class="gia">
+                                        <label>
+                                            <input type="radio" name="mang" value="Vinaphone" checked>
+                                            <img src="../image/vina.png"
+                                                style="background-color: white;border:1px solid rgb(229, 231, 236);height: 90px; width: 90%; text-align: center; border-radius:5px;">
+                                        </label>
+                                    </th>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <div style="padding:25px; padding-top: 10px;">
+                            <form method="get">
+                                <table>
+                                    <tr>
+                                        <th style="width: 25%;   ">
+                                            <div class="form-group">
+                                                <select id="soluong" class="form-control" name="soluong">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+
+                                        </th>
+                                    </tr>
+                                    <b>
+                                        <label for="">Mệnh giá nạp</label>
+                                    </b>
+                                    <tr>
+                                        <th class="gia" style="width:25%">
+                                            <label>
+                                                <input type="radio" name="gia" value="10000" checked>
+                                                <div class="money" style="width:120px">
+                                                    <a>10.000đ</a>
+                                                </div>
+
+                                            </label>
+
+                                        </th>
+                                        <th class="gia" style="width:25%">
+                                            <label>
+                                                <input type="radio" name="gia" value="20000" checked>
+                                                <div class="money" style="width:120px">
+                                                    <a>20.000đ</a>
+                                                </div>
+
+                                            </label>
+
+                                        </th>
+                                        <th class="gia" style="width:25%">
+                                            <label>
+                                                <input type="radio" name="gia" value="50000" checked>
+                                                <div class="money" style="width:120px">
+                                                    <a>50.000đ</a>
+                                                </div>
+
+                                            </label>
+
+                                        </th>
+                                        <th class="gia" style="width:25%">
+                                            <label>
+                                                <input type="radio" name="gia" value="100000" checked>
+                                                <div class="money" style="width:120px">
+                                                    <a>100.000đ</a>
+                                                </div>
+                                            </label>
+                                        </th>
+                                    </tr>
+
+                                </table>
+                                <div class="form-group">
+                                    <% if (error.length> 0) { %>
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <%= error %>
+                                        </div>
+                                        <% } %>
+                                </div>
+                                <div style="text-align: center;">
+                                    <button style="background-color: rgb(255,101,0);border:1px solid rgb(229, 231, 236);
+                                     width: 20%; text-align: center; padding: 10px;color: white;
+                                    border-radius:5px;" type="submit">Mua thẻ</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Rút tiền</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('header_user.ejs',{fullname:fullname}) %>
+        <div class="container">
+            <div class="row justify-content-center " style="margin-top: 50px">
+                <div class="col-lg-5 col-md-6">
+                    <form method="post" class="border rounded w-100 mb-5 mx-auto px-3 pt-3 bg-light">
+                        <div class="nap"
+                            style="margin-top: 20px;text-align: center; padding-top: 10px;background-color: rgb(52,58,64); ">
+                            <div>
+                                <span id='vie'>Vie</span>
+                                <span id="pay">Pay</span>
+                            </div>
+
+                            <p style="color:rgb(154, 149, 146);font-size: 15px; padding-bottom: 20px;">Rút tiền về tài
+                                khoản</p>
+
+                        </div>
+                        <div class="nap" style="margin-top: 20px; padding: 20px; ">
+                            <div class="form-group">
+                                <label for="" style="color:rgb(154, 149, 146)">Số tiền cần rút</label>
+                                <input value="<%= sotien %>" type="text" id="sotien" name="sotien" class="form-control"
+                                    placeholder="Số tiền cần rút">
+                            </div>
+                        </div>
+                        <img src="/image/card.png"
+                            style=" border-radius: 10%; height: 70px;  padding: 5px; text-align: center; width: 60px;">
+                        <div class="nap"
+                            style="margin-top: -30px;padding: 20px;padding-left: 20px;margin-bottom: 20px;">
+                            <p style="color:rgb(154, 149, 146);"><b>Thông tin thẻ</b></p>
+                            <div class="form-group">
+                                <label style="color:rgb(154, 149, 146);" for="">Số thẻ</label>
+                                <input value="<%= sothe  %>" type="text" id="sothe" name="sothe" class="form-control"
+                                    placeholder="Số thẻ">
+                            </div>
+                            <div class="form-group">
+                                <label style="color:rgb(154, 149, 146);" for="">Ngày hết hạn</label>
+                                <input value="<%= ngayhethan %>" id="ngayhethan" type="date" name="ngayhethan"
+                                    class="form-control" placeholder="Ngày hết hạn">
+                            </div>
+                            <div class="form-group">
+                                <label style="color:rgb(154, 149, 146);" for="">Mã CVV</label>
+                                <input value="<%= cvv %>" type="text" id="cvv" name="cvv" class="form-control"
+                                    placeholder="Mã CVV">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p style="color: red;"><b id="phirut" name="phirut"></b></p>
+                        </div>
+                        <% if(error.length>0){ %>
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <%= error %>
+                            </div>
+                            <% } %>
+                                <div class="form-group text-center">
+                                    <button class="btnn">Rút tiền</button>
+                                </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="../js/main.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

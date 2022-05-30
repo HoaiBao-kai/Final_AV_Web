@@ -1,0 +1,242 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+} */
+
+
+/* Thong tin ca nhan */
+/* body {
+  background: rgb(99, 39, 120)
+} */
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #BA68C8
+}
+
+.profile-button {
+  background: rgb(99, 39, 120);
+  box-shadow: none;
+  border: none
+}
+
+.profile-button:hover {
+  background: #682773
+}
+
+.profile-button:focus {
+  background: #682773;
+  box-shadow: none
+}
+
+.profile-button:active {
+  background: #682773;
+  box-shadow: none
+}
+
+.back:hover {
+  color: #682773;
+  cursor: pointer
+}
+
+.labels {
+  font-size: 11px
+}
+
+.add-experience:hover {
+  background: #BA68C8;
+  color: #fff;
+  cursor: pointer;
+  border: solid 1px #BA68C8
+}
+
+#vie {
+  color: rgb(255,101,0); 
+  font-size: 25px;
+}
+#pay{
+  color: white; 
+  font-size: 25px;
+}
+#avatar{
+  height: 40px; width:40px
+}
+
+.card1{
+   background-color: rgba(255, 255, 255, 0.918); width:700px;height:450px; border-radius:10px;margin-top: 60px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+#viet{
+  color: rgb(138, 22, 22);
+}
+table{
+  width: 100%;
+}
+.gia{
+  width: 20%;
+ 
+}
+.money{
+  color: rgb(255,101,0);
+  background-color: white;
+   border:1px solid rgb(229, 231, 236); height: 50px; width: 100%; text-align: center; padding: 10px;border-radius:5px;
+   margin-bottom: 15px;
+}
+.card{
+  
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                                                       max-width: 300px;
+                                                       height: 250px;
+                                                       border-radius:10px;
+                                                       margin: auto;
+                                                       font-family: arial;
+                                                       
+}
+.bg{
+  background-color:#fc9145;
+}
+.card :hover{
+  background-color: rgb(255,101,0);
+  color: #f1f1f1;
+}
+.b{
+  width:250px; height:300px;   margin-left: 20px;
+}
+.img{
+  width:200px;  height: 200px; 
+  margin-left: 20px;
+}
+.text{
+  height:80px;border:1px solid rgb(218,220,224);
+  padding-left: 10px;
+
+}
+
+
+
+.dropdown {
+  position: relative;
+
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  margin-right: 70px;
+  min-width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1 ; color: rgb(255,101,0);}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.btnn{
+  background-color: rgb(58, 190, 46);border:1px solid rgb(229, 231, 236);
+  width: 30%; text-align: center; padding: 10px;color: white;
+  border-radius:5px;
+}
+
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img{
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 2px solid rgb(255,101,0);
+}
+
+[type=radio] +.money{
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked +.money{
+  outline: 2px solid rgb(255,101,0);
+}
+
+.nap{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                                                       max-width: 700px;
+                                                      
+                                                       border-radius:10px;
+                                                       margin: auto;
+                                                       font-family: arial;
+
+}
+.chuyen{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                                                       max-width: 700px;
+                                                      
+                                                       border-radius:10px;
+                                                      
+                                                       font-family: arial;
+
+}
+
+
+
+
+
+
+#homepage  {
+
+  
+  line-height: 63px;
+
+  border-radius: 50%;
+  font-size: 30px;
+
+  transition: .5s;
+}
+
+#homepage ::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgb(255,101,0);
+  transition: .5s;
+  transform: scale(.9);
+  z-index: -1;
+}
+
+#homepage :hover::before {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgb(255,101,0);
+}
+
+#homepage:hover {
+  color: rgb(255,101,0);
+  box-shadow: 0 0 10px rgb(255,101,0);
+  text-shadow: 0 0 15px rgb(255,101,0);
+}
+.sectionlogin{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}

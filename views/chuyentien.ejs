@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Chuyển tiền</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <%- include('header_user.ejs',{fullname:fullname}) %>
+        <div class="container">
+            <div class="row justify-content-center" style="margin-top: 50px;">
+                <div class="col-lg-5 col-md-6">
+
+                    <form method="post" action="chuyentien"
+                        class="border rounded w-100 mb-5 mx-auto px-3 pt-3 bg-light">
+                        <div class="nap"
+                            style="margin-top: 20px;text-align: center; padding-top: 10px;background-color: rgb(52,58,64); ">
+                            <div>
+                                <span id='vie'>Vie</span>
+                                <span id="pay">Pay</span>
+                            </div>
+
+                            <p style="color:rgb(154, 149, 146);font-size: 15px; padding-bottom: 20px;">Chuyển tiền trong
+                                ViePay</p>
+
+                        </div>
+                        <div class="nap" style="margin-top: 20px; padding: 20px; ">
+                            <div class="form-group">
+                                <label for="" style="color:rgb(154, 149, 146);">Số điện thoại người nhận</label>
+                                <input value="<%= sdt %>" type="text" id="sdt" name="sdt" class="form-control"
+                                    placeholder="Số điện thoại người nhận">
+                            </div>
+                            <div class="form-group">
+                                <label for="" style="color:rgb(154, 149, 146);">Số tiền cần chuyển</label>
+                                <input value="<%= sotien %>" type="number" id="sotien" name="sotien"
+                                    class="form-control" placeholder="Số tiền cần chuyển">
+                            </div>
+                            <div class="form-group">
+                                <label for="" style="color:rgb(154, 149, 146);">Ghi chú</label>
+                                <textarea class="form-control" name="ghichu" id="ghichu" cols="30"
+                                    rows="3"><%= ghichu %></textarea>
+                            </div>
+                            <div class="form-group">
+                                <p style="color: red;" id="phirut" name="phirut"></p>
+                            </div>
+                            <div class="form-group" style="color:rgb(154, 149, 146);">
+                                <label for="">Bên chịu phí chuyển tiền</label>
+                                <select name="chiuphichuyen" id="chiuphichuyen" class="form-control">
+                                    <option value="1">Người nhận</option>
+                                    <option value="2">Người gửi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p style="color: red;"><b id="phirut" name="phirut"></b></p>
+                        </div>
+                        <% if(error.length>0){ %>
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <%= error %>
+                            </div>
+                            <% } %>
+                                <div class="form-group text-center">
+                                    <button class="btnn">Chuyển tiền</button>
+                                </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="../js/main.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

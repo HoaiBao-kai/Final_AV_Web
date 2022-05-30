@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<title>Lịch sử giao dịch</title>
+</head>
+
+<body>
+	<%- include('header_admin.ejs') %>
+		<div class="container mt-5">
+			<h2 style="margin:30px 30px 30px 30px;color:  rgb(255,101,0); text-align: center;">Danh sách giao dịch</h2>
+			<table class="table table-bordered text-center">
+				<tr>
+					<th>ID</th>
+					<th>Loại giao dịch</th>
+					<th>Username</th>
+					<th>Số tiền</th>
+					<th>Thời gian thực hiện</th>
+					<th>Trạng thái</th>
+				</tr>
+				<tbody>
+					<% if(transactionData.length!=0){ transactionData.forEach(function(data){ %>
+						<tr>
+							<% if (data.kind===0) {%>
+								<td><a href="/admin/lichsugiaodich/chitietnaptien/<%= data.id %>">
+										<%= data.id %>
+									</a></td>
+								<td>Nạp tiền</td>
+								<%} else if (data.kind===1) {%>
+									<td><a href="/admin/lichsugiaodich/chitietruttien/<%= data.id %>">
+											<%= data.id %>
+										</a></td>
+									<td>Rút tiền</td>
+									<%} else if (data.kind===2) {%>
+										<td><a href="/admin/lichsugiaodich/chitietchuyentien/<%= data.id %>">
+												<%= data.id %>
+											</a></td>
+										<td>Chuyển tiền</td>
+										<%} else if (data.kind===3){ %>
+											<td><a href="/admin/lichsugiaodich/chitietmuamathe/<%= data.id %>">
+													<%= data.id %>
+												</a></td>
+											<td>Mua thẻ điện thoại</td>
+											<% } else { %>
+												<td><a href="/admin/lichsugiaodich/chitietnhantien/<%= data.id %>">
+														<%= data.id %>
+													</a></td>
+												<td>Nhận tiền</td>
+												<% } %>
+													<td><a href="user/<%= data.username %>">
+															<%= data.username %>
+														</a></td>
+													<td>
+														<%= data.money.toLocaleString() + '  VNĐ' %>
+													</td>
+													<td>
+														<%= data.delivery_time.toLocaleString('vi-VN', { hour12: false
+															}) %>
+													</td>
+													<% if(data.status==0){%>
+														<td style="color:green">
+															Thành công
+														</td>
+														<%} else if (data.status===1) {%>
+															<td style="color:red">
+																Đang chờ duyệt
+															</td>
+															<% } else { %>
+																<td style="color:red">
+																	Từ chối
+																</td>
+																<% } %>
+
+						</tr>
+						<% }) %>
+							<% } else{ %>
+								<tr>
+									<td colspan="6">No Data Found</td>
+								</tr>
+								<% } %>
+				</tbody>
+			</table>
+		</div>
+</body>
+
+</html>

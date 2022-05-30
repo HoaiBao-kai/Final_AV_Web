@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Xác nhận chuyển tiền</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('header_user.ejs',{fullname:fullname}) %>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <h2 style="color: rgb(255,101,0); text-align: center; margin-top: 50px;">Xác nhận thông tin</h2>
+                    <form method="post" action="xacnhanchuyentien"
+                        class="border rounded w-100 mb-5 mx-auto px-3 pt-3 bg-light">
+                        <div class="nap"
+                            style="margin-top: 20px;text-align: center; padding-top: 10px;background-color: rgb(52,58,64); ">
+                            <div>
+                                <span id='vie'>Vie</span>
+                                <span id="pay">Pay</span>
+                            </div>
+
+                            <p style="color:rgb(154, 149, 146);font-size: 15px; padding-bottom: 20px;">Chuyển tiền trong
+                                ViePay</p>
+
+                        </div>
+                        <table style="margin-bottom: 20px">
+                            <tr>
+                                <td>
+                                    <div class="chuyen" style="margin-top: 20px; padding: 20px; margin-right: 10px;">
+                                        <p style="color:rgb(154, 149, 146);"><b>Thông tin người gửi</b></p>
+                                        <% str=nguoigui.length name=nguoigui.slice(11,str) sdt=nguoigui.slice(0,10) %>
+                                            <p><b>Username</b><a style="float: right;  margin-right: 10px;">
+                                                    <%= name %>
+                                                </a></p>
+                                            <p><b>Họ và tên</b><a style="float: right;  margin-right: 10px;">
+                                                    <%= name %>
+                                                </a></p>
+                                            <p><b>Số điện thoại</b><a style="float: right;  margin-right: 10px;">
+                                                    <%= sdt %>
+                                                </a></p>
+                                    </div>
+                                    <input type="hidden" value="<%= nguoigui %>" id="nguoigui" name="nguoigui">
+                                </td>
+                                <td>
+                                    <div class="chuyen" style="margin-top: 20px; padding: 20px; ">
+                                        <p style="color:rgb(154, 149, 146);"><b>Thông tin người nhận</b></p>
+                                        <% str=nguoinhan.length name=nguoinhan.slice(11,str) sdt=nguoinhan.slice(0,10)
+                                            %>
+                                            <p><b>Username</b><a style="float: right;  margin-right: 10px;">
+                                                    <%= name %>
+                                                </a></p>
+                                            <p><b>Họ và tên</b><a style="float: right;  margin-right: 10px;">
+                                                    <%= name %>
+                                                </a></p>
+                                            <p><b>Số điện thoại</b><a style="float: right;  margin-right: 10px;">
+                                                    <%= sdt %>
+                                                </a></p>
+                                    </div>
+                                    <input value="<%= nguoinhan %>" type="hidden" id="nguoinhan" name="nguoinhan"
+                                        class="form-control" placeholder="Đến số điện thoại - Tên Người Nhận">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="chuyen" style="margin-top: 10px; padding: 20px; margin-right: 10px;">
+                                        <p style="color:rgb(154, 149, 146);"><b>Thông tin chuyển</b></p>
+                                        <p><b>Số tiền chuyển</b><a style="float: right;  margin-right: 10px;">
+                                                <%= sotien %>
+                                            </a></p>
+                                        <p><b>Bên chịu phí</b><a style="float: right;  margin-right: 10px; ">
+                                                <%= benthanhtoan %>
+                                            </a></p>
+                                        <p><b>Phí giao dịch</b><a style="float: right;  margin-right: 10px; color:red">
+                                                <%= chiphi %>
+                                            </a></p>
+                                        <p style="color:rgb(154, 149, 146);">Lời nhắn</p>
+                                        <textarea value="<%= ghichu %>" disabled class="form-control" name="loinhan"
+                                            id="loinhan" cols="2" rows="2"
+                                            placeholder="Nội dung"><%= ghichu %></textarea>
+                                    </div>
+                                    <input value="<%= sotien %>" type="hidden" id="sotien" name="sotien"
+                                        class="form-control" placeholder="Số tiền">
+                                    <input value="<%= chiphi %>" type="hidden" id="chiphi" name="chiphi"
+                                        class="form-control" placeholder="Số tiền">
+                                    <input value="<%= thoigian %>" type="hidden" id="thoigian" name="thoigian"
+                                        class="form-control" placeholder="Thời gian">
+                                    <input value="<%= benthanhtoan %>" type="hidden" id="benthanhtoan"
+                                        name="benthanhtoan" class="form-control" placeholder="Bên chịu phí">
+                                    <input type="hidden" value="<%= ghichu %>" class="form-control" name="ghichu"
+                                        id="ghichu" cols="10" rows="5" placeholder="Nội dung">
+                                </td>
+                                <td>
+                                    <div class="chuyen" style=" margin-top: 10px; padding: 20px; float: top; ">
+                                        <p style="color:rgb(154, 149, 146);">Mã OTP đã gửi đến</p>
+                                        <p style="  margin-right: 10px;">
+                                            <%= email %>
+                                        </p>
+                                        <label style="color:rgb(154, 149, 146);">Nhập OTP</label>
+                                        <input type="text" id="OTP" name="OTP" class="form-control" placeholder="OTP">
+                                        <div class="form-group" style="margin-top:5px">
+                                            <% if (message.length> 0) { %>
+                                                <div class="alert alert-danger alert-dismissible fade show">
+                                                    <button type="button" class="close"
+                                                        data-dismiss="alert">&times;</button>
+                                                    <%= message %>
+                                                </div>
+                                                <% } %>
+                                        </div>
+                                        <div class="form-group text-center" style="margin-top: 40px;">
+                                            <button class="btn btn-success px-5">Xác nhận</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

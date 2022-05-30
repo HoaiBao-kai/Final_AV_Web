@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Xem thông tin cá nhân</title>
+</head>
+
+<body>
+    <%- include('header_admin.ejs') %>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6" style="margin-top: 50px;">
+                    <form class="border rounded w-100 mb-5 mx-auto px-3 pt-3 bg-light">
+                        <div style="text-align: center;">
+                            <img src="/image/avatar.png" style="width:80px; ">
+                        </div>
+                        <div class="nap"
+                            style="margin-top: -30px;padding: 20px;padding-left: 20px;margin-bottom: 20px;">
+                            <div style="text-align: center; margin-top: 10px;">
+                                <a style="color:rgb(255,101,0); ">
+                                    <b>
+                                        <%=data.username%>
+                                    </b>
+                                </a>
+                            </div>
+                            <a style="color:rgb(154, 149, 146)">Ngày tham gia ví:&nbsp</a><a style="float: right;">
+                                <%=data.account_day.toLocaleString('vi-VN', { hour12: false }) %>
+                            </a></br>
+                            <a style="color:rgb(154, 149, 146)">Trạng thái:
+
+                                <%if (data.kind=="TK1" ){ str="Đang chờ kích hoạt" %>
+                                    <a style="float: right;color: rgb(255, 204, 0);">
+                                        <%= str %>
+                                    </a>
+                                    <%} else if(data.kind=="TK2" ){ str="Đã kích hoạt" %>
+                                        <a style="float: right;color: green;">
+                                            <%= str %>
+                                        </a>
+                                        <%} else if(data.kind=="TK3" ){ str="Vô hiệu hóa" %>
+                                            <a style="float: right;color: rgb(255,101,0);">
+                                                <%= str %>
+                                            </a>
+                                            <%} else if(data.kind=="TK4" ){ str="Bị khóa vô thời hạn" %>
+                                                <a style="float: right;color: red;">
+                                                    <%= str %>
+                                                </a>
+                                                <%} else { str="Đang chờ cập nhập" %>
+                                                    <a style="float: right;color: red;">
+                                                        <%= str %>
+                                                    </a>
+                                                    <%}%>
+
+
+                            </a></br>
+                            <% if (data.kind==="TK4" ) { %>
+                                <a style="color:rgb(154, 149, 146)">Thời điểm khoá:&nbsp;&nbsp;&nbsp;<a
+                                        style="float: right;">
+                                        <b>
+                                            <%= data.lock_account_day.toLocaleString('vi-VN', { hour12: false }) %>
+                                        </b>
+                                    </a></a></br>
+                                <% } %>
+                                    <a style="color:rgb(154, 149, 146)">Số dư ví:&nbsp;&nbsp;&nbsp;<a
+                                            style="float: right;color: rgb(255,101,0);">
+                                            <b>
+                                                <%= data.account_balance.toLocaleString() %> VNĐ
+                                            </b>
+                                        </a></a></br>
+                                    <% if(data.kind!="TK1" ){ %>
+                                        <a style="color:rgb(154, 149, 146)">Lịch sử giao dịch:<a style="float: right;"
+                                                href="/admin/lichsugiaodichcanhan_admin/<%=data.username%>">
+
+                                                Xem lịch sử giao dịch
+
+                                            </a></a></br>
+                                        <% } %>
+
+                        </div>
+                        <div class="nap" style="margin-top: 20px; padding: 20px; margin-bottom: 20px;">
+                            <h5 style="color:rgb(154, 149, 146)">Thông tin cá nhân</h5></br>
+                            <div>
+                                <p><b>Họ và tên: </b>
+                                    <a style="float: right;">
+                                        <%= data.fullname %>
+                                    </a>
+                                </p>
+                                <p><b>Giới tính:</b>
+                                    <a style="float: right;">
+                                        <%= data.sex %>
+                                    </a>
+
+                                </p>
+                                <p><b>Ngày sinh: </b>
+                                    <a style="float: right;">
+                                        <%= data.birthday.toLocaleDateString("vi-VN") %>
+                                    </a>
+
+                                </p>
+                                <p><b>Số điện thoại:</b>
+                                    <a style="float: right;">
+                                        <%= data.phone %>
+                                    </a>
+
+                                </p>
+                                <p><b>Email:</b>
+                                    <a style="float: right;">
+                                        <%= data.email %>
+                                    </a>
+
+                                </p>
+                                <p><b>Địa chỉ: </b>
+                                    <a style="float: right;">
+                                        <%= data.address %>
+                                    </a>
+
+                                </p>
+                                <p><b>CMND/CCCD</b>
+                                    <% if (data.kind==="TK5" ) { %>
+                                        <a style="float: right; color: red;">Cần bổ sung thông tin CMND</a>
+                                        <% } %>
+                                </p>
+                                <table border="1" style=" border:1px solid rgb(229, 231, 236);">
+
+                                    <% if( (data.st_identify_card!=null || data.nd_identify_card!=null)){%>
+                                        <tr style="text-align: center; ">
+                                            <th>
+                                                <img src="/image/<%=data.st_identify_card%>"
+                                                    style="width:50%;margin: 10px;">
+                                            </th>
+                                        </tr>
+                                        <tr style="text-align: center; ">
+                                            <th>
+                                                <img src="/image/<%=data.nd_identify_card%>"
+                                                    style="width:50%;margin: 10px;">
+                                            </th>
+                                        </tr>
+                                        <%}%>
+
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                        <%if (data.kind=="TK1" || data.kind=="TK5" ){ %>
+                            <div class="nap" style="margin-top: 20px; padding: 20px; margin-bottom: 20px;">
+                                <a style="margin-left: 10%; color: white;" class="btn btn-success " data-toggle="modal"
+                                    data-target="#modalXacMinh">Xác minh</a>
+                                <a style="margin-left: 3%; color: white;" class="btn btn-primary " data-toggle="modal"
+                                    data-target="#modalBoSung">Cập nhật </a>
+                                <a style="margin-left: 3%; color: white;" class="btn btn-danger " data-toggle="modal"
+                                    data-target="#modalVoHieuHoa">Huỷ</a>
+                            </div>
+
+                            <%} else if(data.kind=="TK3" || data.kind=="TK4" ){ %>
+                                <div class="nap" style="margin-top: 20px;padding: 20px;  margin-bottom: 20px;">
+
+                                    <a class="btn btn-danger" data-toggle="modal" data-target="#modalUnclock"
+                                        style="margin-left:35%; color: white;">Mở
+                                        khóa
+                                    </a>
+
+                                </div>
+
+                                <%} %>
+                </div>
+                </form>
+            </div>
+
+
+            </table>
+        </div>
+        </div>
+
+        </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+
+        <!-- Modal xác minh -->
+        <div id="modalXacMinh" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Xác Minh</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn muốn xác minh cho <span style="font-weight: bold;">
+                                <%= data.fullname%>
+                            </span> với username là <span style="font-weight: bold;">
+                                <%= data.username %>
+                            </span> !!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/admin/mokhoataikhoan/<%= data.username %>" type="button" class="btn btn-success">Xác
+                            minh</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal Unclock -->
+        <div id="modalUnclock" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Xác Minh</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn muốn Mở Khóa cho username: <span style="font-weight: bold;">
+                                <%= data.username %>
+                            </span> !!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/admin/xacminhtaikhoan/<%= data.username %>" type="button"
+                            class="btn btn-success">Yes</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal Bổ sung -->
+        <div id="modalBoSung" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Bổ sung</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn muốn username: <span style="font-weight: bold;">
+                                <%= data.username %>
+                            </span> !! bổ sung CMND</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/admin/bosungtaikhoan/<%= data.username %>" type="button"
+                            class="btn btn-success">Yes</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal Vô hiệu hoá -->
+        <div id="modalVoHieuHoa" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Huỷ tài khoản</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn muốn vô hiệu hoá username: <span style="font-weight: bold;">
+                                <%= data.username %>
+                            </span> !!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/admin/vohieutaikhoan/<%= data.username %>" type="button"
+                            class="btn btn-success">Yes</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>LSGD</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <%- include('header_user.ejs',{fullname:fullname}) %>
+        <div class="container">
+            <h2 style="margin:30px 30px 30px 30px;color:  rgb(255,101,0); text-align: center;">Lịch sử giao dịch</h2>
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Loại giao dịch</th>
+                    <th>Số tiền</th>
+                    <th>Thời gian thực hiện</th>
+                    <th>Trạng thái</th>
+                </tr>
+                <tbody>
+                    <% if(transactionData.length!=0){ transactionData.forEach(function(data){ %>
+                        <tr>
+                            <% if (data.kind===0) {%>
+                                <td><a href="./chitietnaptien/<%= data.id %>">
+                                        <%= data.id %>
+                                    </a></td>
+                                <td>Nạp tiền</td>
+                                <%} else if (data.kind===1) {%>
+                                    <td><a href="./chitietruttien/<%= data.id %>">
+                                            <%= data.id %>
+                                        </a></td>
+                                    <td>Rút tiền</td>
+                                    <%} else if (data.kind===2) {%>
+                                        <td><a href="./chitietchuyentien/<%= data.id %>">
+                                                <%= data.id %>
+                                            </a></td>
+                                        <td>Chuyển tiền</td>
+                                        <%} else if (data.kind===3){ %>
+                                            <td><a href="./chitietmuamathe/<%= data.id %>">
+                                                    <%= data.id %>
+                                                </a></td>
+                                            <td>Mua thẻ điện thoại</td>
+                                            <% } else { %>
+                                                <td><a href="./chitietnhantien/<%= data.id %>">
+                                                        <%= data.id %>
+                                                    </a></td>
+                                                <td>Nhận tiền</td>
+                                                <% } %>
+                                                    <td>
+                                                        <%= data.money.toLocaleString() + '  VNĐ' %>
+                                                    </td>
+                                                    <td>
+                                                        <%= data.delivery_time.toLocaleString('vi-VN', { hour12: false
+                                                            }) %>
+                                                    </td>
+                                                    <% if (data.status===0) {%>
+                                                        <td class="text-success">Thành công</td>
+                                                        <%} else if (data.status===1) {%>
+                                                            <td style="color:rgb(255, 204, 0);">Đang chờ duyệt</td>
+                                                            <%} else{ %>
+                                                                <td class="text-danger">Từ chối</td>
+                                                                <% } %>
+                        </tr>
+                        <% }) %>
+                            <% } else{ %>
+                                <tr>
+                                    <td colspan="5">No Data Found</td>
+                                </tr>
+                                <% } %>
+                </tbody>
+            </table>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
