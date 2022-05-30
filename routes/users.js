@@ -44,8 +44,6 @@ router.get('/chitietmuamathe/:id',IsLogin,function(req,res,next){
   })
 })
 
-
-
 var storage = multer.diskStorage({
   destination: function(req, file, callback) {
       callback(null, "public/image")
@@ -645,7 +643,19 @@ router.post('/doimatkhau',IsLogin,  resetPassValidator, (req, res) => {
 
       const sql = 'update account set password = ? where username = ?';
       const params = [hasednewpw , user.username];
-
+      const sql2 = 'select * from account where username = ?';
+      const params2 = [user.username];
+      
+      db.query(sql2,params2,(err, results, fields)=>{
+        const hashed = results[0].password
+        const check = bcrypt.compareSync(password, hashed)
+        if (!check) {
+            req.flash('error', 'Mật khẩu hiện tại không hợp lệ')
+            req.flash('password', password)
+            return res.redirect('/users/doimatkhau')
+        }
+        
+      })
       db.query(sql, params, (err, results, fields) => {
           if (err) {
               req.flash('error', err.message)
@@ -662,14 +672,8 @@ router.post('/doimatkhau',IsLogin,  resetPassValidator, (req, res) => {
               return res.redirect('/users/doimatkhau')
           }
           else {
-              const hashed = user.password
-              const check = bcrypt.compareSync(password, hashed)
-              if (!check) {
-                  req.flash('error', 'Mật khẩu hiện tại không hợp lệ')
-                  req.flash('password', password)
-                  return res.redirect('/users/doimatkhau')
-              }
-              return res.redirect('/')
+            
+            return res.redirect('/')
 
           }
       })
