@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `final_project_web` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `final_project_web`;
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: final_project_web
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,7 +57,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('admin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'$2a$12$pqdz2SUpMTfY2OD3AxRBQ.IuCna868c/at8UOyxpclQfT9BA8BtPC',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `account` VALUES ('admin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'$2a$12$pqdz2SUpMTfY2OD3AxRBQ.IuCna868c/at8UOyxpclQfT9BA8BtPC',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Admin',NULL);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-30 11:26:55
+-- Dump completed on 2022-05-30 11:35:48
