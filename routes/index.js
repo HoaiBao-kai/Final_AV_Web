@@ -48,6 +48,7 @@ router.get('/logout', (req, res, next) => {
 })
 
 router.post('/dangnhap', loginValidator, (req, res, next) => {
+  let result = validationResult(req);
   if (result.errors.length === 0) {
       const {username, password} = req.body;
 
@@ -80,7 +81,6 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
             let current = new Date().getTime();
             let dDate = new Date(results[0].lock_account_day).getTime();
             let time = current - dDate;
-            console.log(time)
             
             if(results[0].unusual_signin === 1 && time <6000){
               console.log('Chặn')
