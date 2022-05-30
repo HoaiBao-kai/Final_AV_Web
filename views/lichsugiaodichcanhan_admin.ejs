@@ -68,11 +68,15 @@
 														<td style="color:green">
 															Thành công
 														</td>
-														<%}else{%>
+														<%}else if (data.status === 1){%>
 															<td style="color:red">
 																Đang chờ duyệt
 															</td>
-															<%} %>
+														<%} else { %>
+															<td style="color:red">
+																Từ chối
+															</td>
+														<% } %>
 
 						</tr>
 						<% }) %>
