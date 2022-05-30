@@ -118,11 +118,10 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
               let user = results[0]
               req.session.user = user
 
-              if (results[0].unusual_signin === 1 || results[0].count_wrongpass !== 0) {
-                const sql2 = 'update account set kind = "TK2", unusual_signin = 0, count_wrongpass = 0 where username = ?';
-                const params2 = [username];
-                db.query(sql2, params2)
-              }
+              const sql2 = 'update account set unusual_signin = 0, count_wrongpass = 0 where username = ?';
+              const params2 = [username];
+              db.query(sql2, params2)
+              
               return res.redirect('/')
             }
           }
@@ -164,13 +163,6 @@ function lockAccount(kind, username, dateTime) {
 function updateUnusual(count, username, dateTime) {
   const sql = 'update account set unusual_signin = ?,lock_account_day = ? where username = ?';
   const params = [count,dateTime, username];
-
-  db.query(sql, params);
-}
-
-function resetLock(username) {
-  const sql = 'update account set count_wrongpass = 0, unusual_signin = 0 where username = ?';
-  const params = [username];
 
   db.query(sql, params);
 }
