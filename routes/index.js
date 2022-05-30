@@ -73,11 +73,7 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
             const check = bcrypt.compareSync(password, hashed)
             const count = results[0].count_wrongpass || 0 
             console.log(count)
-            if(results[0].role ==="Admin"){
-              let user = results[0]
-              req.session.user = user
-              return res.redirect('/')
-            }
+            
             if(results[0].kind === 'TK4'){
               req.flash('error', 'Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ')
               return res.redirect('/dangnhap')
@@ -93,6 +89,12 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
             }
             
             if (!check){
+              if(results[0].role ==="Admin"){
+                  req.flash('error', 'Mật khẩu không đúng')
+                  req.flash('password', password)
+                  req.flash('username', username)
+                  return res.redirect('/dangnhap')
+              }
               if(count === 2){
                 req.flash('error', 'Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút')
                 req.flash('password', password)
