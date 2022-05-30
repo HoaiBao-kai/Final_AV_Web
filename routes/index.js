@@ -118,9 +118,11 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
               let user = results[0]
               req.session.user = user
 
-              const sql2 = 'update account set kind = "TK2", unusual_signin = 0, count_wrongpass = 0 where username = ?';
-              const params2 = [username];
-              db.query(sql2, params2)
+              if (result[0].unusual_signin === 1 || results[0].count_wrongpass !== 0) {
+                const sql2 = 'update account set kind = "TK2", unusual_signin = 0, count_wrongpass = 0 where username = ?';
+                const params2 = [username];
+                db.query(sql2, params2)
+              }
               return res.redirect('/')
             }
           }
