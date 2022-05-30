@@ -39,12 +39,12 @@ const loginValidator = [
 router.get('/dangnhap', (req, res, next) => {
   const error = req.flash('error') || ''
   const username = req.flash('username') || ''
-  res.render('dangnhap', {error, username})
+  return res.render('dangnhap', {error, username})
 })
 
 router.get('/logout', (req, res, next) => {
   req.session.destroy()
-  res.redirect('/dangnhap')
+  return res.redirect('/dangnhap')
 })
 
 router.post('/dangnhap', loginValidator, (req, res, next) => {
