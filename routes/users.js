@@ -771,6 +771,8 @@ router.post('/chuyentien',IsLogin,transaction_accept,  chuyenTienPassValidator, 
               let nguoinhan = results[0].phone +"-"+ results[0].fullname
               let email = data.email
               sendOTP(email)
+              console.log(nguoigui)
+              console.log(nguoinhan)
               const message = ''
               return res.render('xacnhanchuyentien',{sotien: sotien.toLocaleString(),thoigian, benthanhtoan, chiphi, ghichu,fullname:req.session.user.fullname, nguoigui, nguoinhan, email, message})
             }
@@ -809,6 +811,8 @@ router.post('/xacnhanchuyentien',IsLogin,transaction_accept,(req, res)=>{
   const user = req.session.user
   const {nguoinhan, sotien, thoigian, chiphi, benthanhtoan, ghichu, nguoigui, email} = req.body
   let message;
+  console.log(nguoigui)
+  console.log(nguoinhan)
 
   let sdt = nguoinhan.slice(0,10)
   let id = Math.floor(Math.random() * (999999 - 100000)) + 100000;
@@ -889,6 +893,8 @@ router.post('/xacnhanchuyentien',IsLogin,transaction_accept,(req, res)=>{
   else {
     message = 'Mã OTP không hợp lệ'
     // console.log(nguoigui)
+    console.log(nguoigui)
+    console.log(nguoinhan)
     return res.render('xacnhanchuyentien',{sotien: sotien.toLocaleString(),thoigian, benthanhtoan, chiphi, ghichu,fullname:req.session.user.fullname, nguoigui, nguoinhan, email, message})
   }
 })
