@@ -654,9 +654,8 @@ router.post('/doimatkhau',IsLogin,  resetPassValidator, (req, res) => {
             req.flash('password', password)
             return res.redirect('/users/doimatkhau')
         }
-        
-      })
-      db.query(sql, params, (err, results, fields) => {
+
+        db.query(sql, params, (err, results, fields) => {
           if (err) {
               req.flash('error', err.message)
               req.flash('password', password)
@@ -676,8 +675,9 @@ router.post('/doimatkhau',IsLogin,  resetPassValidator, (req, res) => {
             return res.redirect('/')
 
           }
+        })
+        
       })
-      return;
   }
   else
   {
@@ -701,7 +701,7 @@ router.post('/doimatkhau',IsLogin,  resetPassValidator, (req, res) => {
 
 router.get('/doimatkhau', IsLogin,(req, res, next)=>{
   const error = req.flash('error') || ''
-  return res.render('doimatkhau',{error})
+  return res.render('doimatkhau',{error, fullname:req.session.user.fullname})
 })
 
 const chuyenTienPassValidator = [
