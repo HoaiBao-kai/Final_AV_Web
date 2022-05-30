@@ -83,7 +83,6 @@ router.post('/dangnhap', loginValidator, (req, res, next) => {
             let time = current - dDate;
             
             if(results[0].unusual_signin === 1 && time <6000){
-              console.log('Chặn')
               req.flash('error', 'Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút')
               return res.redirect('/dangnhap')
             }
